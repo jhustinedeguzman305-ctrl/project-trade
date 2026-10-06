@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background); --color-foreground: var(--foreground);
+  --color-card: var(--card); --color-card-foreground: var(--foreground);
+  --color-popover: var(--popover); --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--primary);
+  --color-chart-1: var(--chart-1); --color-chart-2: var(--chart-2); --color-chart-3: var(--chart-3); --color-chart-4: var(--chart-4); --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar); --color-sidebar-foreground: var(--foreground); --color-sidebar-border: var(--border);
+  --color-positive: var(--positive); --color-warning: var(--warning);
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 10px; --radius-2xl: 14px;
+}
+:root, .dark {
+  color-scheme: dark;
+  --background: #0b0e11; --foreground: #e9edf0; --card: #111519; --popover: #191e23;
+  --primary: #a2edaa; --primary-foreground: #112317; --secondary: #20262b; --muted: #1b2126; --muted-foreground: #929ca6;
+  --accent: #232c2a; --destructive: #ed828b; --border: #252b31; --input: #30373e;
+  --chart-1: #a2edaa; --chart-2: #697f91; --chart-3: #a3a9ff; --chart-4: #dfbe80; --chart-5: #ed828b;
+  --sidebar: #0e1114; --positive: #9ce6ac; --warning: #dfbe80; --radius: 0.5rem;
+}
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; font-size: 13px; }
+  button:not(:disabled), [role='button']:not(:disabled) { cursor: pointer; }
+  ::selection { background: #a2edaa35; color: #e9edf0; }
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+  html { scrollbar-color: #343d44 #101417; }
+}
+@layer components {
+  .eyebrow { @apply text-[10px] font-medium uppercase tracking-[0.13em] text-muted-foreground; }
+  .number { @apply font-mono tabular-nums tracking-tight; }
+  .panel { @apply rounded-xl border border-border bg-card; }
+  .panel-heading { @apply flex items-center justify-between gap-3 px-5 pt-5 pb-4; }
+  .panel-title { @apply text-sm font-medium tracking-tight; }
+  .nav-item { @apply flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-[12px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground; }
+  .nav-item[data-active='true'] { background: #a2edaa12; color: var(--primary); box-shadow: inset 2px 0 0 var(--primary); }
+  .status-dot { @apply inline-block size-1.5 shrink-0 rounded-full bg-primary; box-shadow: 0 0 8px #a2edaa30; }
+  .coin { @apply flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold; }
+  .coin[data-coin='BTC'] { background: #e4a04b15; color: #e5ad6b; border-color: #e4a04b20; }
+  .coin[data-coin='ETH'] { background: #a3a9ff15; color: #aaaefa; border-color: #a3a9ff20; }
+  .coin[data-coin='SOL'] { background: #9ce6ac12; color: #9ce6ac; border-color: #9ce6ac20; }
+  .bot-visual { background: radial-gradient(ellipse at center, #a2edaa0d 0%, transparent 65%), linear-gradient(#a2edaa05 1px, transparent 1px), linear-gradient(90deg, #a2edaa05 1px, transparent 1px); background-size: auto, 22px 22px, 22px 22px; }
+  .bot-orbit { @apply relative flex size-25 items-center justify-center rounded-full border border-primary/15; }
+  .bot-orbit::before { content: ''; position: absolute; inset: 10px; border-radius: 50%; border: 1px dashed #a2edaa35; }
+  .bot-core { @apply flex size-12 items-center justify-center rounded-xl border border-primary/40 bg-primary/10 text-primary; box-shadow: 0 0 32px #a2edaa15; }
+  .market-table { @apply w-full border-collapse text-left text-xs; }
+  .market-table th { @apply border-y border-border bg-background/25 px-5 py-3 text-[10px] font-normal uppercase tracking-wider text-muted-foreground; }
+  .market-table td { @apply border-b border-border/60 px-5 py-3; }
+  .market-table tbody tr:last-child td { @apply border-b-0; }
+  .market-table tbody tr { @apply transition-colors hover:bg-muted/35; }
+  .feed-item { @apply flex gap-3 border-b border-border/60 py-4 last:border-0; }
+  .page-enter { animation: enter 240ms ease-out both; }
+  @keyframes enter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .page-enter { animation: none; } * { scroll-behavior: auto !important; } }
+}
